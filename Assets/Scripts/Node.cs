@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,24 +11,35 @@ public class Node : MonoBehaviour, IPointerDownHandler // Implement IPointerDown
     [SerializeField] protected int pointValue = 1;
     [SerializeField] protected int pointCost = 0;
 
-    [SerializeField] protected float transparentAVal = 125.0f;
+    [SerializeField] protected float transparentAVal = 20.0f;
 
     [SerializeField] protected bool isActivated;
 
     protected ScoreManager scoreManager;
 
-    private void Awake()
+    protected TextMeshProUGUI valueText;
+    protected TextMeshProUGUI costText;
+
+    protected virtual void Awake()
     {
         scoreManager = GameObject.Find("Score Manager").GetComponent<ScoreManager>();
+
+        valueText = transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+        costText = transform.GetChild(0).GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
+
+        SetValue(pointValue); // display the point value of this node
+        SetCost(pointCost); // display the cost of buying this node
 
         // if the node starts deactivated, make it transparent
         if (!isActivated)
         {
             SetAlpha(transparentAVal);
         }
+
+        //Debug.Log("Base");
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         // If the node is not already active and it's point cost has been reached, call it's OnActivate method to activate it
         if (!gameObject.activeSelf && scoreManager.score >= pointCost)
@@ -59,6 +71,10 @@ public class Node : MonoBehaviour, IPointerDownHandler // Implement IPointerDown
         }
     }
 
+    /// <summary>
+    /// Set the alpha of the node's color to a new value
+    /// </summary>
+    /// <param name="value"></param>
     protected void SetAlpha(float value)
     {
         // set the alpha of the node's color to a new value
@@ -66,6 +82,23 @@ public class Node : MonoBehaviour, IPointerDownHandler // Implement IPointerDown
         Color newColor = spriteRenderer.color;
         newColor.a = value / 255; // convert the a value from a value between 0-255 to a value between 0-1
         spriteRenderer.color = newColor;
+    }
+
+    protected void SetCost(int value)
+    {
+        pointCost = value;
+        costText.text = "" + pointCost;
+    }
+
+    protected void SetValue(int value)
+    {
+        pointValue = value;
+        valueText.text = "" + value;
+    }
+
+    protected void SetValue(string value)
+    {
+        valueText.text = value;
     }
 
     /// <summary>
