@@ -10,7 +10,7 @@ public class ScoreManager : MonoBehaviour
     AddScore() method, but I am using a public property with a private backing
     field instead for the purposes of using encapsulation in this project */
     [SerializeField] private int _score;
-    public int score 
+    public int score // ENCAPSULATION
     {
         get { return _score; }
         set { UpdateScore(value); }
@@ -21,7 +21,7 @@ public class ScoreManager : MonoBehaviour
         UpdateScore(0);
     }
 
-    private void UpdateScore(int value)
+    private void UpdateScore(int value) // ABSTRACTION
     {
         // prevent score from going below 0
         _score = value >= 0 ? value : 0;

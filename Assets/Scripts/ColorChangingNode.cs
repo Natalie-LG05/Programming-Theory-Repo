@@ -5,7 +5,7 @@ using UnityEngine;
 /// except that it starts with a random color and changes colors randomly 
 /// whenever it is clicked while active
 /// </summary>
-public class ColorChangingNode : Node
+public class ColorChangingNode : Node // INHERITANCE
 {
     [SerializeField] protected Color[] colors;
 
@@ -24,7 +24,7 @@ public class ColorChangingNode : Node
         ChangeColor();
     }
 
-    protected override void OnClick()
+    protected override void OnClick() // POLYMORPHISM
     {
         base.OnClick();
         ChangeColor();
@@ -36,7 +36,7 @@ public class ColorChangingNode : Node
         return colors[randomIndex];
     }
 
-    private void ChangeColor()
+    private void ChangeColor() // ABSTRACTION
     {
         spriteRenderer.color = RandomColor();
         SetAlpha(isActivated ? 255.0f : transparentAVal);

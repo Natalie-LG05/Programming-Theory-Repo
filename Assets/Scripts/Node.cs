@@ -90,13 +90,13 @@ public class Node : MonoBehaviour, IPointerDownHandler // Implement IPointerDown
         costText.text = "" + pointCost;
     }
 
-    protected void SetValue(int value)
+    protected void SetValue(int value) // POLYMORPHISM
     {
         pointValue = value;
         valueText.text = "" + value;
     }
 
-    protected void SetValue(string value)
+    protected void SetValue(string value) // POLYMORPHISM
     {
         valueText.text = value;
     }
