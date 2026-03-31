@@ -12,12 +12,17 @@ public class Node : MonoBehaviour
         scoreManager = GameObject.Find("Score Manager").GetComponent<ScoreManager>();
     }
 
+    /// <summary>
+    /// Called when this node is clicked
+    /// </summary>
     protected virtual void OnClick()
     {
         scoreManager.score += pointValue;
     }
 
-    /// <summary>Called when this node is unlocked</summary>
+    /// <summary>
+    /// Called when this node is unlocked
+    /// </summary>
     protected virtual void OnActivate()
     {
         gameObject.SetActive(true);
