@@ -6,10 +6,13 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreText;
 
-    private int _score;
-    public int score
+    /* ideally I would instead use a normal private score and have a public
+    AddScore() method, but I am using a public property with a private backing
+    field instead for the purposes of using encapsulation in this project */
+    [SerializeField] private int _score;
+    public int score 
     {
-        get { return score; }
+        get { return _score; }
         set { UpdateScore(value); }
     }
 
